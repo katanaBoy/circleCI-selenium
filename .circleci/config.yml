@@ -65,7 +65,7 @@ jobs:
 
       - run:
           name: Install Bundeler
-          command: gem install bundler
+          command: sudo gem install bundler
 
       - run:
           name: Install Gems
@@ -84,7 +84,7 @@ jobs:
       - save_cache:
           key: gems-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - ./vendor/bundle
+            - vendor/bundle
 
       #     when: always
       #     path: fastlane/screenshots
