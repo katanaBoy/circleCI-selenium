@@ -13,9 +13,6 @@ jobs:
           name: Bundle Install
           command: bundle check --path vendor/bundle || bundle install --deployment
 
-  
-
-
       - store_test_results:
           when: always
           path: fastlane/report.xml
