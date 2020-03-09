@@ -116,7 +116,7 @@ jobs:
 
       - run:
          name: Test
-         command: bundle exec sel_test.rb
+         command: bundle exec ruby sel_test.rb
 
 
       - store_test_results:
