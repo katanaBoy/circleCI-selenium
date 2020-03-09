@@ -81,9 +81,9 @@ jobs:
 
       #     when: always
       #     path: fastlane/screenshots
-#      - store_test_results:
-#          when: always
-#          path: fastlane/report.xml
-#      - store_artifacts:
-#          when: always
-#          path: fastlane/report.xml
+      - store_test_results:
+          when: always
+          path: fastlane/report.xml
+      - store_artifacts:
+          when: always
+          path: fastlane/report.xml
