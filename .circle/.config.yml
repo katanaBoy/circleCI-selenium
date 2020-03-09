@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.5-stretch
 
+    steps:
       - restore_cache:
           keys:
             - gems-v2-{{ checksum "Gemfile.lock" }}
