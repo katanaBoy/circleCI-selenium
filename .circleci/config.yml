@@ -85,6 +85,12 @@ jobs:
 #          name: Fastlane
 #          command: bundle exec fastlane ci
 
+      - run:
+          name: Update Bundler
+          command: |
+            gem env
+
+
       - save_cache:
           key: gems-v2-{{ checksum "Gemfile.lock" }}
           paths:
@@ -107,7 +113,7 @@ jobs:
 
       - run:
          name: Test
-         command: ruby sel_test.rb
+         command: bundle exec sel_test.rb
 
 
       - store_test_results:
