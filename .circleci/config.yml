@@ -32,10 +32,7 @@ jobs:
 #            rm -f app/google-services.json
 #            curl "https://flipdish.blob.core.windows.net/android-push-notification-creds/$WHITE_LABEL_ID/google-services.json?$GOOGLE_JSON_AZURE_SAS" -o app/google-services.json
 
-#      - restore_cache:
-#          keys:
-#            - gems-v2-{{ checksum "Gemfile.lock" }}
-#            - gems-v2-
+
 
 #      - run:
 #          name: Install Image Magick
@@ -97,6 +94,10 @@ jobs:
           command: |
             docker run -d --name ff_conttainer  selenium/standalone-chrome:3.141.59
 
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+            - gems-v2-
 
       - run:
          name: Test
