@@ -67,7 +67,9 @@ jobs:
           name: Install Bundeler
           command: gem install bundler
 
-
+      - run:
+          name: Install Gems
+          command: bundle check || bundle install
 
       # - run:
       #     name: Start Display
@@ -79,9 +81,10 @@ jobs:
 #          name: Fastlane
 #          command: bundle exec fastlane ci
 
-#      - save_cache:
-#          key: gems-v2-{{ checksum "Gemfile.lock" }}
-
+      - save_cache:
+          key: gems-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
 
       #     when: always
       #     path: fastlane/screenshots
@@ -95,11 +98,6 @@ jobs:
 #          keys:
 #            - gems-v2-{{ checksum "Gemfile.lock" }}
 #            - gems-v2-
-
-
-      - run:
-          name: Install Gems
-          command: bundle check || bundle install
 
       - run:
          name: Test
