@@ -86,9 +86,12 @@ jobs:
 #          command: bundle exec fastlane ci
 
       - run:
-          name: Update Bundler
+          name: Env
           command: |
             gem env
+            which gem
+            which irb
+            which ruby
 
 
       - save_cache:
