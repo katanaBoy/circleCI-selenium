@@ -1,22 +1,22 @@
 version: 2
 jobs:
   build:
-  
+
     docker:
       - image: circleci/ruby:2.6.5-stretch
 
-    steps:
-      - restore_cache:
-          keys:
-            - gems-v2-{{ checksum "Gemfile.lock" }}
-            - gems-v2-
-      - run:
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+  steps:
+    - restore_cache:
+        keys:
+          - gems-v2-{{ checksum "Gemfile.lock" }}
+          - gems-v2-
+    - run:
+        name: Bundle Install
+        command: bundle check --path vendor/bundle || bundle install --deployment
 
-      - store_test_results:
-          when: always
-          path: fastlane/report.xml
-      - store_artifacts:
-          when: always
-          path: fastlane/report.xml
+    - store_test_results:
+        when: always
+        path: fastlane/report.xml
+    - store_artifacts:
+        when: always
+        path: fastlane/report.xml
