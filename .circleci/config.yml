@@ -65,7 +65,9 @@ jobs:
 
       - run:
           name: Update Bundler
-          command: gem update bundler
+          command: |
+            gem update bundler
+            bundle update --bundler
 #          command: gem install bundler
 #          command: sudo gem update --system
 
@@ -100,6 +102,8 @@ jobs:
 #          keys:
 #            - gems-v2-{{ checksum "Gemfile.lock" }}
 #            - gems-v2-
+
+
 
       - run:
          name: Test
