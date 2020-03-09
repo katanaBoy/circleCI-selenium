@@ -8,7 +8,7 @@ jobs:
       BUNDLE_RETRY: 3
 
     docker:
-      - image: circleci/2.4.2-jessie-node
+      - image: circleci/2.4.9-buster
         environment:
             BUNDLE_JOBS: 3
             BUNDLE_RETRY: 3
