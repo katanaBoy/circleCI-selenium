@@ -1,22 +1,90 @@
 version: 2
+
 jobs:
   build:
+    working_directory: ~/project/circleCI-selenium
+    environment:
+     
+      BUNDLE_RETRY: 3
 
     docker:
-      - image: circleci/ruby:2.6.5-stretch
+      - image: circleci/android:api-24
+      - image: selenium/standalone-chrome:3.141.59
 
-  steps:
-    - restore_cache:
-        keys:
-          - gems-v2-{{ checksum "Gemfile.lock" }}
-          - gems-v2-
-    - run:
-        name: Bundle Install
-        command: bundle check --path vendor/bundle || bundle install --deployment
 
-    - store_test_results:
-        when: always
-        path: fastlane/report.xml
-    - store_artifacts:
-        when: always
-        path: fastlane/report.xml
+    steps:
+      - checkout:
+          path: ~/project
+
+#      - run:
+#          name: Decrypt Credentials
+#          command: |
+#            openssl enc -aes-256-cbc -d -md md5 -in google_credentials/default.json.encrypted   -out google_credentials/default.json   -k "$GOOGLE_JSON_PASSPHRASE"
+#            openssl enc -aes-256-cbc -d -md md5 -in google_credentials/wlid_1681.json.encrypted -out google_credentials/wlid_1681.json -k "$GOOGLE_JSON_PASSPHRASE"
+#      - run:
+#          name: Download google-services.json
+#          command: |
+#            rm -f app/google-services.json
+#            curl "https://flipdish.blob.core.windows.net/android-push-notification-creds/$WHITE_LABEL_ID/google-services.json?$GOOGLE_JSON_AZURE_SAS" -o app/google-services.json
+
+      - restore_cache:
+          keys:
+            - gems-v2-{{ checksum "Gemfile.lock" }}
+            - gems-v2-
+
+#      - run:
+#          name: Install Image Magick
+#          command: |
+#            sudo apt-get -qq update
+#            sudo apt-get -qq install imagemagick
+
+
+
+      # - run:
+      #     name: chrome driver
+      #     command: |
+      #       curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      #       (sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb || sudo apt-get -fy install)
+      #       rm -rf /tmp/google-chrome-stable_current_amd64.deb
+      #       sudo sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox --no-sandbox|g' "/opt/google/chrome/google-chrome"
+      #       google-chrome --version
+
+      # - run:
+      #     name: chrome driver 2
+      #     command: |
+      #       export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+      #       curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip"
+      #       cd /tmp
+      #       unzip chromedriver_linux64.zip
+      #       rm -rf chromedriver_linux64.zip
+      #       sudo mv chromedriver /usr/local/bin/chromedriver
+      #       sudo chmod +x /usr/local/bin/chromedriver
+      #       chromedriver --version
+
+      - run:
+          name: Install Gems
+          command: bundle check || bundle install
+
+      # - run:
+      #     name: Start Display
+      #     command: sudo Xvfb :99 -screen 0 1280x1024x24
+      #     background: true
+
+
+#      - run:
+#          name: Fastlane
+#          command: bundle exec fastlane ci
+
+      - save_cache:
+          key: gems-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      #     when: always
+      #     path: fastlane/screenshots
+      - store_test_results:
+          when: always
+          path: fastlane/report.xml
+      - store_artifacts:
+          when: always
+          path: fastlane/report.xml
