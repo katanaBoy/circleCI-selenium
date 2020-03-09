@@ -81,9 +81,16 @@ jobs:
 
       #     when: always
       #     path: fastlane/screenshots
+
+      - run:
+         name: Test
+         command: ruby sel_test.rb
+
+
       - store_test_results:
           when: always
-          path: fastlane/report.xml
+          path: tmp/report.xml
+
       - store_artifacts:
           when: always
-          path: fastlane/report.xml
+          path: tmp/
