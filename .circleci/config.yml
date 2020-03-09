@@ -63,9 +63,10 @@ jobs:
       #       sudo chmod +x /usr/local/bin/chromedriver
       #       chromedriver --version
 
-#      - run:
-#          name: Install Bundeler
-#          command: sudo gem install bundler
+      - run:
+          name: Update Bundler
+#          command: gem install bundler
+          command: gem update --system
 
       - run:
           name: Install Gems
