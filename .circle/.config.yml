@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/project/circleCI-selenium
+    working_directory: ~/circleCI-selenium
     docker:
       - image: circleci/ruby:2.6.5-stretch
 
@@ -13,9 +13,7 @@ jobs:
           name: Bundle Install
           command: bundle check --path vendor/bundle || bundle install --deployment
 
-      - run:
-          name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+  
 
 
       - store_test_results:
