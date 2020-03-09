@@ -8,7 +8,8 @@ jobs:
       BUNDLE_RETRY: 3
 
     docker:
-      - image: circleci/android:api-24
+      #- image: circleci/android:api-24
+      #- image: selenium/standalone-chrome:3.141.59
       - image: selenium/standalone-chrome:3.141.59
 
 
@@ -83,14 +84,20 @@ jobs:
       #     path: fastlane/screenshots
 
       - run:
+          name: "Start docker ff container "
+          command: |
+            docker run -d --name ff_conttainer  selenium/standalone-chrome:3.141.59
+
+
+      - run:
          name: Test
          command: ruby sel_test.rb
 
 
       - store_test_results:
           when: always
-          path: tmp/report.xml
+          path: /tmp/report.xml
 
       - store_artifacts:
           when: always
-          path: tmp/
+          path: /tmp/*.*
