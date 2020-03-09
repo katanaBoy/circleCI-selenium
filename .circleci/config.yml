@@ -105,7 +105,7 @@ jobs:
       - run:
           name: "Start docker browser container "
           command: |
-            docker run -d --name chrome_conttainer  selenium/standalone-chrome:3.141.59
+            docker run d -p 4444:4444 -v /dev/shm:/dev/shm --name chrome_conttainer  selenium/standalone-chrome:3.141.59
 
 #      - restore_cache:
 #          keys:
