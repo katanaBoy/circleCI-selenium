@@ -14,7 +14,7 @@ driver.quit
 
 #pc = Pathname.new("/usr/bin/ruby")
 
-res = File.exist?(pc)
+res = File.exist?(pn)
 
 puts(res)
 
