@@ -1,4 +1,6 @@
 require 'selenium-webdriver'
+require 'pathname'
+
 width = 1024
 height = 728
 driver = Selenium::WebDriver.for :remote, url: "http://localhost:4444/wd/hub", desired_capabilities: :chrome
@@ -6,10 +8,15 @@ driver.navigate.to 'http://google.com'
 driver.execute_script %Q{
   window.resizeTo(#{width}, #{height});
 }
-driver.save_screenshot('/tmp/screenshot.png')
+pn = "/tmp/screenshot.png"
+driver.save_screenshot(pn)
 driver.quit
 
+#pc = Pathname.new("/usr/bin/ruby")
 
+res = File.exist?(pc)
+
+puts(res)
 
 # require 'rubygems'
 # require 'selenium'
