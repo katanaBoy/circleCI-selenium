@@ -127,4 +127,4 @@ jobs:
 
       - store_artifacts:
           when: always
-          path: /tmp/*.*
+          path: /tmp/
