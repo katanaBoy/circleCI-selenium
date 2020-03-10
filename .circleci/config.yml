@@ -15,7 +15,7 @@ jobs:
             BUNDLE_PATH: vendor/bundle
       #- image: circleci/android:api-24
       #- image: selenium/standalone-chrome:3.141.59
-      - image: selenium/standalone-chrome:3.141.59
+      #- image: selenium/standalone-chrome:3.141.59
 
 
     steps:
