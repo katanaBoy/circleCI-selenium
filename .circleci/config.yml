@@ -14,8 +14,8 @@ jobs:
             BUNDLE_RETRY: 3
             BUNDLE_PATH: vendor/bundle
       #- image: circleci/android:api-24
-      #- image: selenium/standalone-chrome:3.141.59
-      #- image: selenium/standalone-chrome:3.141.59
+      - image: selenium/standalone-chrome:3.141.59
+      #- image: selenium/standalone-firefox:3.141.59
 
 
     steps:
@@ -102,12 +102,12 @@ jobs:
       #     when: always
       #     path: fastlane/screenshots
 
-      - run:
-          name: "Start docker browser container "
-          command: |
-            docker network create grid
-            docker run -d -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.141.59-zirconium
-            docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.141.59-zirconium
+#      - run:
+#          name: "Start docker browser container "
+#          command: |
+#            docker network create grid
+#            docker run -d -p 4444:4444 --net grid --name selenium-hub selenium/hub:3.141.59-zirconium
+#            docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm selenium/node-chrome:3.141.59-zirconium
 
 #      - restore_cache:
 #          keys:

@@ -1,7 +1,7 @@
 require 'selenium-webdriver'
 width = 1024
 height = 728
-driver = Selenium::WebDriver.for :remote, url: "http://selenium-hub:4444/wd/hub", desired_capabilities: :chrome
+driver = Selenium::WebDriver.for :remote, url: "http://localhost:4444/wd/hub", desired_capabilities: :chrome
 driver.navigate.to 'http://google.com'
 driver.execute_script %Q{
   window.resizeTo(#{width}, #{height});
